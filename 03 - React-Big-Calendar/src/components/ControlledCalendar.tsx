@@ -1,7 +1,5 @@
 import moment from "moment";
 import MyCalendar from "./MyCalendar";
-import { max } from './../../node_modules/dayjs/esm/plugin/minMax/index.d';
-import { min } from './../../node_modules/date-arithmetic/index';
 
 const events = [
   {
@@ -16,6 +14,17 @@ const events = [
   },
 ];
 
+// const formats = useMemo(() => ({
+//   dateFormat: 'dd',
+
+//   dayFormat: (date, , localizer) =>
+//     localizer.format(date, 'DDD', culture),
+
+//   dayRangeHeaderFormat: ({ start, end }, culture, localizer) =>
+//     localizer.format(start, { date: 'short' }, culture) + ' — ' +
+//     localizer.format(end, { date: 'short' }, culture)
+// }), [])
+
 const ControlledCalendar = () => {
   return (
     // <MyCalendar
@@ -24,11 +33,15 @@ const ControlledCalendar = () => {
     //   date={moment('1995-03-06').toDate()}
     //   toolbar={false}
     // />
+    // <MyCalendar
+    //   events={events}
+    //   max={moment('2025-04-30T14:00:00').toDate()}
+    //   min={moment('2025-04-30T10:00:00').toDate()}
+
+    // />
     <MyCalendar
       events={events}
-      max={moment('2025-04-30T14:00:00').toDate()}
-      min={moment('2025-04-30T10:00:00').toDate()}
-      
+      formats={{ dayHeaderFormat: (date) => moment(date).format('dddd @ DD') }}
     />
   );
 }
