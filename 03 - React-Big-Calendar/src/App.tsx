@@ -1,13 +1,16 @@
 // import { BasicCalendar } from "./components"
 
-import { ControlledCalendar } from "./components";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { AdvancedCalendar, BasicCalendar, ControlledCalendar, CustomizedCalendar } from "./components";
 
 
 const App = () => {
   return (
     <main style={{ height: '95vh', width: '90vw', margin: 'auto' }}>
       {/* <BasicCalendar />    */}
-      <ControlledCalendar/>
+      {/* <ControlledCalendar/> */}
+      {/* <CustomizedCalendar/> */}
+      <AdvancedCalendar/>
     </main>
   );
 }

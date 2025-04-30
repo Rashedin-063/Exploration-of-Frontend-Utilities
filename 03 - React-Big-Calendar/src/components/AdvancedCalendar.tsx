@@ -14,6 +14,8 @@ const events = [
   },
 ];
 
+
+
 export default function AdvancedCalendar() {
   return <MyCalendar events={events} />;
 }
