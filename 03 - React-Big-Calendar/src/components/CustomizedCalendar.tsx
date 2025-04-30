@@ -1,5 +1,5 @@
-import moment from "moment";
-import MyCalendar from "./MyCalendar";
+import moment from 'moment';
+import MyCalendar from './MyCalendar';
 
 const events = [
   {
@@ -17,18 +17,10 @@ const events = [
 
 const ControlledCalendar = () => {
   return (
-    // <MyCalendar
-    //   defaultView={'day'}
-    //   views={['month', 'week', 'day']}
-    //   date={moment('1995-03-06').toDate()}
-    //   toolbar={false}
-    // />
     <MyCalendar
       events={events}
-      max={moment('2025-04-30T14:00:00').toDate()}
-      min={moment('2025-04-30T10:00:00').toDate()}
-
+      formats={{ dayHeaderFormat: (date) => moment(date).format('dddd @ DD') }}
     />
   );
-}
-export default ControlledCalendar
+};
+export default ControlledCalendar;
