@@ -1,11 +1,13 @@
-import { BasicCalendar } from "./components"
+// import { BasicCalendar } from "./components"
+
+import { ControlledCalendar } from "./components";
 
 
 const App = () => {
   return (
     <main style={{ height: '95vh', width: '90vw', margin: 'auto' }}>
-      <BasicCalendar />
-    
+      {/* <BasicCalendar />    */}
+      <ControlledCalendar/>
     </main>
   );
 }
