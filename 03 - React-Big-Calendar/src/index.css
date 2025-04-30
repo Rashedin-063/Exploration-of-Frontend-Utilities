@@ -8,11 +8,13 @@
 .rbc-event{
   background-color: #2114af !important;
   color: white !important;
-  padding: 10px !important;
+  border-radius: 8px !important;
+
 }
 
-/* .rbc-event-content {
-  background-color: #07032f !important;
+.rbc-event-content {
+  /* background-color: #07032f !important; */
   color: white !important;
-  padding: 10px !important;
-} */
+  padding: 3px !important;
+  border-radius: 8px !important;
+}
