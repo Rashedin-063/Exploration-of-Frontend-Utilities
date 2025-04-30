@@ -1,6 +1,12 @@
+import { BasicCalendar } from "./components"
+
+
+
 const App = () => {
   return (
-    <div>App</div>
-  )
+    <main style={{ height: '95vh', width: '90vw' }}>
+      <BasicCalendar />
+    </main>
+  );
 }
 export default App
