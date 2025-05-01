@@ -1,3 +1,10 @@
+.rbc-calendar{
+  background-color: #121212 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  border: 1px solid #121212 !important;
+}
+
 .rbc-header{
   background-color: #121212 !important;
   color: white !important;
@@ -43,5 +50,18 @@
 
 .rbc-time-content .rbc-day-slot:nth-child(8)  {
   background-color: #f6f6f6; 
+}
+
+
+.rbc-time-content .rbc-day-slot:nth-child(7) {
+  background-color: #f6f6f6; 
+}
+
+.rbc-month-view .rbc-day-bg:nth-child(6) {
+  background-color: #f6f6f6 !important;
+}
+
+.rbc-month-view .rbc-day-bg:nth-child(7) {
+  background-color: #f6f6f6 !important;
 }
 
