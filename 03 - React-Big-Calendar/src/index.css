@@ -18,3 +18,35 @@
   padding: 3px !important;
   border-radius: 8px !important;
 }
+
+.rbc-month-view {
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  margin-top: 1rem !important;
+}
+
+.rbc-header{
+  background-color: #fff !important;
+  padding: 8px 0px !important;
+}
+
+.rbc-header span{
+  font-size: 16px !important;
+  font-weight: 400 !important;  
+}
+
+.rbc-month-view .rbc-off-range-bg{
+  background-color: #e6e6e6 !important;
+}
+
+.rbc-day-bg, .rbc-day-slot{
+  background-color: #fff;
+}
+
+.rbc-date-cell{
+  text-align: left !important;
+  padding-top: 5px;
+  padding-left: 8px;
+  font-size: 20px !important;
+}
+
