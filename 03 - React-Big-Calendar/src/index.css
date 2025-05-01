@@ -5,6 +5,11 @@
   font-size: 17px !important;
 }
 
+.rbc-header span{
+  font-size: 16px !important;
+  font-weight: 400 !important;  
+}
+
 .rbc-event{
   background-color: #2114af !important;
   color: white !important;
@@ -19,21 +24,7 @@
   border-radius: 8px !important;
 }
 
-.rbc-month-view {
-  border: 1px solid var(--secondary-color);
-  border-radius: 4px;
-  margin-top: 1rem !important;
-}
 
-.rbc-header{
-  background-color: #fff !important;
-  padding: 8px 0px !important;
-}
-
-.rbc-header span{
-  font-size: 16px !important;
-  font-weight: 400 !important;  
-}
 
 .rbc-month-view .rbc-off-range-bg{
   background-color: #e6e6e6 !important;
@@ -48,5 +39,9 @@
   padding-top: 5px;
   padding-left: 8px;
   font-size: 20px !important;
+}
+
+.rbc-time-content .rbc-day-slot:nth-child(8)  {
+  background-color: #f6f6f6; 
 }
 
