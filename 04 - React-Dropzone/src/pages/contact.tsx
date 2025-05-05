@@ -8,6 +8,7 @@ import FormLabel from '@/components/FormLabel';
 import InputText from '@/components/InputText';
 import Button from '@/components/Button';
 
+
 function Contact() {
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
 
@@ -21,13 +22,36 @@ const onDrop = useCallback((acceptedFiles: Array<File>) => {
   file.readAsDataURL(acceptedFiles[0]);
 }, []);
   
-const { getRootProps, getInputProps, isDragActive } = useDropzone({
+const {acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
     });
 
 
   async function handleOnSubmit(e: React.SyntheticEvent) {
-    e.preventDefault();    
+    e.preventDefault();
+
+    if (typeof acceptedFiles[0] === 'undefined') return;
+
+    const formData = new FormData();
+
+    formData.append('file', acceptedFiles[0]);
+    formData.append('upload_preset', 'preset_1');
+    formData.append('api_key', import.meta.env.VITE_CLOUDINARY_API_KEY);
+
+   fetch(
+     'https://api.cloudinary.com/v1_1/import.meta.env.VITE_CLOUDINARY_CLOUD_NAME/image/upload',
+     {
+       method: 'POST',
+       body: formData,
+     }
+   )
+     .then((response) => response.json())
+     .then((data) => {
+       console.log('Upload successful:', data);
+     })
+     .catch((error) => {
+       console.error('Error uploading image:', error);
+     });
   }
 
 
