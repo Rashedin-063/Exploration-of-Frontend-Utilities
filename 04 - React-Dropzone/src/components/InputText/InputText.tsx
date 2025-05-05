@@ -9,7 +9,7 @@ const InputText = ({ id, className = '', type = 'text', name }: InputTextProps) 
   return (
     <input
       id={id}
-      className={`block w-full border-gray-400 rounded bg-slate-700 focus:border-indigo-300  ${className}`}
+      className={`block w-full border-gray-400 rounded bg-slate-100 focus:border-indigo-300  ${className} text-slate-900`}
       type={type}
       name={name}
     />

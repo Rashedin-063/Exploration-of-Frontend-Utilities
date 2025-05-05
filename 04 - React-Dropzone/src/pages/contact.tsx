@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
 
 import Layout from '@/components/Layout';
 import Container from '@/components/Container';
@@ -6,30 +7,31 @@ import FormRow from '@/components/FormRow';
 import FormLabel from '@/components/FormLabel';
 import InputText from '@/components/InputText';
 import Button from '@/components/Button';
-import accept from './../../node_modules/attr-accept/index.d';
 
 function Contact() {
-  const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
+  // const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
 
-  /**
-   * handleOnSubmit
-   */
+ const [file, setFile] = useState<File | undefined>();
 
   async function handleOnSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
-
-    console.log('name', e.currentTarget.name.value);
-    console.log('email', e.currentTarget.email.value);
-    console.log('message', e.currentTarget.message.value);
     console.log('image', e.currentTarget.image.files);
     
     
   }
 
+  function handleOnChange(e: React.FormEvent<HTMLInputElement>) {
+    const target = e.target as HTMLInputElement & {
+      files: FileList;
+    };
+
+    setFile(target.files[0]);
+  }
+
   return (
     <Layout>
       <Container>
-        <h1 className='text-6xl font-black text-center text-slate-900 mb-20'>
+        <h1 className='text-6xl font-black text-center text-slate-100 mb-20'>
           Contact Us
         </h1>
 
@@ -54,14 +56,22 @@ function Contact() {
 
           <FormRow className='mb-5'>
             <FormLabel htmlFor='image'>Image</FormLabel>
-            <input id='image' name='image' type='file' accept='image/*' className='border border-gray-300 rounded p-2 w-full' multiple />
+            <input
+              id='image'
+              name='image'
+              type='file'
+              accept='image/*'
+              className='border border-gray-300 rounded p-2 w-full'
+              multiple
+              onChange={handleOnChange}
+            />
           </FormRow>
 
-          {preview && (
+          {/* {preview && (
             <p className='mb-5'>
               <img src={preview as string} alt='Upload preview' />
             </p>
-          )}
+          )} */}
 
           <Button>Submit</Button>
         </form>
