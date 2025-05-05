@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import Layout from '@/components/Layout';
 import Container from '@/components/Container';
@@ -6,6 +6,7 @@ import FormRow from '@/components/FormRow';
 import FormLabel from '@/components/FormLabel';
 import InputText from '@/components/InputText';
 import Button from '@/components/Button';
+import accept from './../../node_modules/attr-accept/index.d';
 
 function Contact() {
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
@@ -17,7 +18,12 @@ function Contact() {
   async function handleOnSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
 
-    // ...existing code...
+    console.log('name', e.currentTarget.name.value);
+    console.log('email', e.currentTarget.email.value);
+    console.log('message', e.currentTarget.message.value);
+    console.log('image', e.currentTarget.image.files);
+    
+    
   }
 
   return (
@@ -44,6 +50,11 @@ function Contact() {
           <FormRow className='mb-5'>
             <FormLabel htmlFor='message'>Message</FormLabel>
             <InputText id='message' name='message' type='text' />
+          </FormRow>
+
+          <FormRow className='mb-5'>
+            <FormLabel htmlFor='image'>Image</FormLabel>
+            <input id='image' name='image' type='file' accept='image/*' className='border border-gray-300 rounded p-2 w-full' multiple />
           </FormRow>
 
           {preview && (
