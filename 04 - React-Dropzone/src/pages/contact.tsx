@@ -1,5 +1,5 @@
-import { useState,} from 'react';
-
+import { SetStateAction, useState, } from 'react';
+import { FileUploader } from 'react-drag-drop-files';
 
 import Layout from '@/components/Layout';
 import Container from '@/components/Container';
@@ -11,7 +11,18 @@ const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 const url = `httpsimport accept from './../../node_modules/attr-accept/index.d';
 ://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
 
+const fileTypes = ['JPG', 'PNG', 'GIF'];
+
 function Contact() {
+
+    const [file, setFile] = useState(null);
+    const handleChange = (file: SetStateAction<null>) => {
+      setFile(file);
+  };
+  
+  console.log(file);
+  
+
   async function handleOnSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
 
@@ -56,10 +67,17 @@ function Contact() {
             <InputText id='message' name='message' type='text' />
           </FormRow>
 
+  
           <FormRow className='mb-5'>
             <FormLabel htmlFor='image'>Image</FormLabel>
-            <InputText id='image' name='image' type='file' accept='image/pdf, image/png' className='p-[6px]' />
+            <FileUploader
+              handleChange={handleChange}
+              name='file'
+              types={fileTypes}
+            />
           </FormRow>
+
+          {file && (<img src={file?.name} alt="file"/>)}
 
           <Button>Submit</Button>
         </form>
