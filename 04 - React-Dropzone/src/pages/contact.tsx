@@ -11,27 +11,25 @@ import Button from '@/components/Button';
 function Contact() {
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
 
- const [file, setFile] = useState<File | undefined>();
+const onDrop = useCallback((acceptedFiles: Array<File>) => {
+  const file = new FileReader();
+
+  file.onload = function () {
+    setPreview(file.result);
+  };
+
+  file.readAsDataURL(acceptedFiles[0]);
+}, []);
+  
+const { getRootProps, getInputProps, isDragActive } = useDropzone({
+      onDrop,
+    });
+
 
   async function handleOnSubmit(e: React.SyntheticEvent) {
     e.preventDefault();    
   }
 
-  function handleOnChange(e: React.FormEvent<HTMLInputElement>) {
-    const target = e.target as HTMLInputElement & {
-      files: FileList;
-    };
-
-    setFile(target.files[0]);
-
-    const file = new FileReader();
-
-    file.onload = function () {
-      setPreview(file.result);
-    };
-
-    file.readAsDataURL(target.files[0]);
-  }
 
   return (
     <Layout>
@@ -61,18 +59,15 @@ function Contact() {
 
           <FormRow className='mb-5'>
             <FormLabel htmlFor='image'>Image</FormLabel>
-            <input
-              id='image'
-              name='image'
-              type='file'
-              accept='image/png, image/jpg'
-              className='border border-gray-300 rounded p-2 w-full'
-              multiple
-              onChange={handleOnChange}
-            />
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              {isDragActive ? (
+                <p>Drop the files here ...</p>
+              ) : (
+                <p>Drag 'n' drop some files here, or click to select files</p>
+              )}
+            </div>
           </FormRow>
-         
-
           {preview && (
             <p className='mb-5'>
               <img src={preview as string} alt='Upload preview' />
