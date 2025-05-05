@@ -7,7 +7,8 @@ import FormRow from '@/components/FormRow';
 import FormLabel from '@/components/FormLabel';
 import InputText from '@/components/InputText';
 import Button from '@/components/Button';
-
+const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
 
 function Contact() {
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
@@ -35,11 +36,11 @@ const {acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone(
     const formData = new FormData();
 
     formData.append('file', acceptedFiles[0]);
-    formData.append('upload_preset', 'preset_1');
+    formData.append('upload_preset', 'preset_6');
     formData.append('api_key', import.meta.env.VITE_CLOUDINARY_API_KEY);
 
    fetch(
-     'https://api.cloudinary.com/v1_1/import.meta.env.VITE_CLOUDINARY_CLOUD_NAME/image/upload',
+     url,
      {
        method: 'POST',
        body: formData,
