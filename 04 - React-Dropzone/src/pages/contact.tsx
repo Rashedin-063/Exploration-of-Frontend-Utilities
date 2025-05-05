@@ -9,15 +9,12 @@ import InputText from '@/components/InputText';
 import Button from '@/components/Button';
 
 function Contact() {
-  // const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
+  const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
 
  const [file, setFile] = useState<File | undefined>();
 
   async function handleOnSubmit(e: React.SyntheticEvent) {
-    e.preventDefault();
-    console.log('image', e.currentTarget.image.files);
-    
-    
+    e.preventDefault();    
   }
 
   function handleOnChange(e: React.FormEvent<HTMLInputElement>) {
@@ -26,6 +23,14 @@ function Contact() {
     };
 
     setFile(target.files[0]);
+
+    const file = new FileReader();
+
+    file.onload = function () {
+      setPreview(file.result);
+    };
+
+    file.readAsDataURL(target.files[0]);
   }
 
   return (
@@ -60,18 +65,19 @@ function Contact() {
               id='image'
               name='image'
               type='file'
-              accept='image/*'
+              accept='image/png, image/jpg'
               className='border border-gray-300 rounded p-2 w-full'
               multiple
               onChange={handleOnChange}
             />
           </FormRow>
+         
 
-          {/* {preview && (
+          {preview && (
             <p className='mb-5'>
               <img src={preview as string} alt='Upload preview' />
             </p>
-          )} */}
+          )}
 
           <Button>Submit</Button>
         </form>
