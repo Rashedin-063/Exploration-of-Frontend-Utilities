@@ -59,7 +59,7 @@ const { getRootProps, getInputProps, isDragActive } = useDropzone({
 
           <FormRow className='mb-5'>
             <FormLabel htmlFor='image'>Image</FormLabel>
-            <div {...getRootProps()}>
+            <div {...getRootProps()} className='w-full border border-gray-400 rounded p-4'>
               <input {...getInputProps()} />
               {isDragActive ? (
                 <p>Drop the files here ...</p>
@@ -69,9 +69,10 @@ const { getRootProps, getInputProps, isDragActive } = useDropzone({
             </div>
           </FormRow>
           {preview && (
-            <p className='mb-5'>
-              <img src={preview as string} alt='Upload preview' />
-            </p>
+            <div className='mb-5 relative'>
+              <img src={preview as string} alt='Upload preview' className='w-40 mx-auto my-12' />
+              <button onClick={() => setPreview(null)} className='absolute -top-4 right-16 bg-red-700  rounded-full w-8 h-8'>X</button>
+            </div>
           )}
 
           <Button>Submit</Button>
