@@ -1,4 +1,4 @@
-import { SetStateAction, useState, } from 'react';
+import { SetStateAction, useEffect, useState, } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 
 import Layout from '@/components/Layout';
@@ -20,7 +20,13 @@ function Contact() {
       setFile(file);
   };
   
-  console.log(file);
+ useEffect(() => {
+   return () => {
+     if (file) {
+       URL.revokeObjectURL(file);
+     }
+   };
+ }, [file]);
   
 
   async function handleOnSubmit(e: React.SyntheticEvent) {
@@ -67,7 +73,6 @@ function Contact() {
             <InputText id='message' name='message' type='text' />
           </FormRow>
 
-  
           <FormRow className='mb-5'>
             <FormLabel htmlFor='image'>Image</FormLabel>
             <FileUploader
@@ -77,7 +82,7 @@ function Contact() {
             />
           </FormRow>
 
-          {file && (<img src={file?.name} alt="file"/>)}
+          {file && <img src={URL.createObjectURL(file)} alt='preview' />}
 
           <Button>Submit</Button>
         </form>
