@@ -8,43 +8,44 @@ import FormLabel from '@/components/FormLabel';
 import InputText from '@/components/InputText';
 import Button from '@/components/Button';
 const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
-const url = `httpsimport accept from './../../node_modules/attr-accept/index.d';
-://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
 
 const fileTypes = ['JPG', 'PNG', 'GIF'];
 
 function Contact() {
 
-    const [file, setFile] = useState(null);
-    const handleChange = (file: SetStateAction<null>) => {
+   const [file, setFile] = useState<File | null>(null);
+   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
+    const handleChange = async(file: SetStateAction<null>) => {
       setFile(file);
+
+         const formData = new FormData();
+         formData.append('file', file);
+         formData.append('upload_preset', 'preset_6');
+      formData.append('api_key', import.meta.env.VITE_CLOUDINARY_API_KEY);
+      
+        try {
+          const response = await fetch(
+           url,
+            {
+              method: 'POST',
+              body: formData,
+            }
+          );
+
+          const data = await response.json();
+          console.log('Upload success:', data);
+          setUploadedUrl(data.secure_url);
+        } catch (err) {
+          console.error('Upload failed:', err);
+        }
   };
   
- useEffect(() => {
-   return () => {
-     if (file) {
-       URL.revokeObjectURL(file);
-     }
-   };
- }, [file]);
+
   
 
   async function handleOnSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
-
-    const formData = new FormData(e.target as HTMLFormElement);
-
-    fetch(url, {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Upload successful:', data);
-      })
-      .catch((error) => {
-        console.error('Error uploading image:', error);
-      });
   }
 
   return (
@@ -82,7 +83,16 @@ function Contact() {
             />
           </FormRow>
 
-          {file && <img src={URL.createObjectURL(file)} alt='preview' />}
+          {uploadedUrl && (
+            <div style={{ marginTop: '20px' }}>
+              <p>Uploaded Image:</p>
+              <img
+                src={uploadedUrl}
+                alt='Uploaded'
+                style={{ maxWidth: '100%', height: 'auto' }}
+              />
+            </div>
+          )}
 
           <Button>Submit</Button>
         </form>
