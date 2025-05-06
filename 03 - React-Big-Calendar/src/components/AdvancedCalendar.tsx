@@ -20,9 +20,22 @@ const events = [
   },
 ];
 
+interface EventData {
+  type: string;
+}
+
+interface EventProps {
+  event: {
+    data?: EventData;
+    title?: React.ReactNode; // Align with ReactNode type
+  };
+  title?: React.ReactNode; // Align with ReactNode type
+}
+
 const components = {
-  event: (props) => {
-    const eventType = props?.event?.data?.type
+  event: (props: EventProps) => {
+    const eventType = props?.event?.data?.type;
+    const title = props.title || ""; // Ensure title is a string
     switch (eventType) {
       case "Reg": 
         return (
@@ -34,20 +47,16 @@ const components = {
               borderRadius: '4px',
             }}
           >
-            {props.title}
+            {title}
           </div>
         );
       case "App": 
-        return <div style={{ background: 'lightgreen', color: 'black', padding: '10px', borderRadius: '4px' }}>{props.title}</div>
-        
-  
-    
+        return <div style={{ background: 'lightgreen', color: 'black', padding: '10px', borderRadius: '4px' }}>{title}</div>;
       default:
         return null;
     }
-    
-}
-}
+  }
+};
 
 export default function AdvancedCalendar() {
   return <MyCalendar events={events} components={components}/>;
